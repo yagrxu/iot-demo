@@ -1,0 +1,17 @@
+{
+  "enabled": true,
+  "name": "Sync README on Code Change",
+  "description": "当 device/ 或 cdk/ 下的代码文件被修改时，提醒检查 README.md 是否需要同步更新",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "device/*.py",
+      "cdk/lib/*.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "代码文件刚被修改，请检查根目录的 README.md 是否需要同步更新。对比修改的代码内容（配置项、文件结构、使用方式、命令等）与 README 中的描述，如果有不一致的地方请更新 README.md。"
+  }
+}
