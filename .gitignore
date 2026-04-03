@@ -1,3 +1,6 @@
-device/certs/
+devices/direct/certs/
+devices/edge/certs/
+gateway/certs/
+gateway/greengrass-data/
 cdk/node_modules/
 cdk/cdk.out/

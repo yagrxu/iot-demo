@@ -1,0 +1,36 @@
+services:
+  gateway:
+    build: ./gateway
+    container_name: iot-gateway
+    ports:
+      - "9500:9500"
+    volumes:
+      - ./gateway/certs:/app/certs
+    networks:
+      - iot-net
+
+  edge-sensor-01:
+    build: ./devices/edge
+    container_name: edge-sensor-01
+    command: ["python", "edge_device.py", "edge-sensor-01"]
+    environment:
+      - GATEWAY_HOST=gateway
+    depends_on:
+      - gateway
+    networks:
+      - iot-net
+
+  edge-sensor-02:
+    build: ./devices/edge
+    container_name: edge-sensor-02
+    command: ["python", "edge_device.py", "edge-sensor-02"]
+    environment:
+      - GATEWAY_HOST=gateway
+    depends_on:
+      - gateway
+    networks:
+      - iot-net
+
+networks:
+  iot-net:
+    driver: bridge
